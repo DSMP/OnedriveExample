@@ -1,0 +1,29 @@
+﻿@{
+    @inject AppSettings appSettings;
+    ViewData["Title"] = "Explorer Page";
+}
+<div>
+    <H2>
+        Expolorer
+    </H2>
+</div>
+<script type="text/javascript">
+    function launchOneDrivePicker() {
+        var odOptions = {
+              clientId: "@appSettings.AzureAd.ClientId",
+            action: "query",
+            multiSelect: false,
+            advanced: {},
+              @*advanced: {
+                queryParameters: "select=id,name,size,file,folder,photo,@microsoft.graph.downloadUrl",
+                filter: "folder,.png" /* display folder and files with extension '.png' only */
+              },*@
+              success: function(files) { /* success handler */ },
+              cancel: function() { /* cancel handler */ },
+              error: function(error) { /* error handler */ }
+        }
+        OneDrive.open(odOptions);
+    }
+</script>
+<button onClick="launchOneDrivePicker()">Open from OneDrive</button>
+<script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
